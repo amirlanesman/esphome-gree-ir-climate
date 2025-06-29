@@ -1,0 +1,33 @@
+esphome:
+  name: YourDeviceName
+  friendly_name: Your Device Name
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/amirlanesman/esphome-gree-ir-climate
+      ref: main
+
+
+remote_transmitter:
+ pin: (your pin)
+ carrier_duty_percent: 50%  #test with different values to see what works best
+ id: ir_transmitter
+
+ remote_receiver:
+  pin: 
+    number: (your pin)
+    inverted: true # (or false, try both to see what works)
+    mode: INPUT_PULLUP
+  id: ir_receiver
+  idle: 30ms  # super important: the gree protocol has a 19800 microsecond break between frames, so we need to set the idle time to at least that
+
+climate:
+- platform: greeir
+  model: yac1fb9
+  set_modes: false
+  repeat: 1
+  name: Bedroom AC
+  id: bedroom_ac
+  transmitter_id: ir_transmitter
+  receiver_id: ir_receiver
