@@ -165,7 +165,7 @@ namespace esphome
         }
         else
         {
-          ESP_LOGVV(TAG, "Bit %d:%d failed. stream index=%d", i, j, data.get_index());
+          ESP_LOGV(TAG, "Bit %d failed. stream index=%d", j, data.get_index());
           return false;
         }
       }
